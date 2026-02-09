@@ -1,6 +1,6 @@
 RAG Pipeline for PDF Question Answering
 A production-ready Retrieval-Augmented Generation (RAG) pipeline that enables intelligent question answering over PDF documents using ChromaDB and OpenAI's GPT models.
-##Features
+🌟 Features
 
 PDF Text Extraction: Robust extraction from PDF files with error handling
 Smart Chunking: Intelligent text chunking with sentence boundaries and overlap
