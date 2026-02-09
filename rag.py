@@ -1,7 +1,19 @@
+import os 
+import uuid
 from typing import List
 from PyPDF2 import PdfReader
 import os
 from dotenv import load_dotenv
+from typing import List
+import re
+from collections import deque
+import chromadb
+from chromadb.utils import embedding_functions
+from chromadb.api.models import Collection
+from typing import List, Any
+
+
+
 load_dotenv()
 
 
@@ -35,9 +47,6 @@ with open(pdf_path, 'wb') as file:
 
 pdf_text = text_extract(pdf_path)
 
-from typing import List
-import re
-from collections import deque
 
 def chunk_text(text: str, max_length=1000) -> List[str]:
     "Chunk text into smaller pieces without breaking sentences."
@@ -72,10 +81,6 @@ chunks = chunk_text(pdf_text, max_length=1000)
 ##Create a vector store
 
 
-import chromadb
-from chromadb.utils import embedding_functions
-from chromadb.api.models import Collection
-
 
 
 def create_vector_store(db_path: str) -> Collection:
@@ -98,9 +103,6 @@ def create_vector_store(db_path: str) -> Collection:
     )
 
     return db
-
-import os 
-import uuid
 
 
 def insert_chunks_vectordb(chunks: List[str], file_path: str) -> None:
@@ -131,7 +133,6 @@ def insert_chunks_vectordb(chunks: List[str], file_path: str) -> None:
     
     #Retrieve chunks
 
-from typing import List, Any
 
 def retrieve_chunks(db: Collection, query:str, n_results: int =2) -> List[Any]:
     "Retrieve relevant chunks from the vector store based on a query."
